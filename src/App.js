@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { Countries, Country, Local } from "./Components/index";
+import Navbar from "./Containers/Navbar/navbar";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route path="/countries" component={Countries} />
+          <Route path="/local" component={Local} />
+          <Route path="/country/:code" component={Country} />
+          <Route path="*">
+            <Redirect to="/countries" />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
